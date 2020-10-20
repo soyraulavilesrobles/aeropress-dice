@@ -9,9 +9,6 @@ const COFFEE_WATER_RATIOS = [
 ];
 
 const GRIND_BREWTIME_RATIOS = [
-  { grind: 'fine', time: 60 },
-  { grind: 'medium', time: 90 },
-  { grind: 'coarse', time: 120 }
 ];
 
 const BLOOM_SECONDS = [20, 30, 40];
@@ -70,38 +67,29 @@ class Recipe extends React.Component {
 
   renderHeatWaterStep() {
     return <li>
-      Heat <strong>{this.state.coffeeWaterRatio.water}g</strong> of water
-      to <strong>{this.state.brewTempC}°C</strong> /
       <strong>{toFahrenheit(this.state.brewTempC)}°F</strong>.
     </li>;
   }
 
   renderGrindCoffeeStep() {
     return <li>
-      Grind <strong>{this.state.coffeeWaterRatio.coffee}g</strong> of coffee to a {this.state.grindBrewTime.grind} grind.
     </li>;
   }
 
   renderPourCoffeeStep() {
     return <li>
-      Pour in the ground coffee.
     </li>;
   }
 
   renderInvertStep() {
     if (this.state.inverted) {
-      return <li>Place the aeropress in the upside-down orientation.</li>
     } else {
-      return <li>Place the aeropress on the mug in the normal orientation with wet filter and cap on.</li>
     }
   }
 
   renderBloomStep() {
     if (this.state.bloomWaterG > 0) {
       return <li>
-        Add <strong>{this.state.bloomWaterG}g</strong> of water and wait
-        <strong> {this.state.bloomSeconds}</strong> seconds
-        for the coffee to bloom.
       </li>;
     }
   }
@@ -109,27 +97,22 @@ class Recipe extends React.Component {
   renderAddWaterStep() {
     if (this.state.bloomWaterG > 0) {
       return <li>
-        Add the remaining <strong>{this.state.coffeeWaterRatio.water - this.state.bloomWaterG}g</strong> of water.
       </li>;
     } else {
       return <li>
-        Add all the water (<strong>{this.state.coffeeWaterRatio.water}g</strong>).
       </li>;
     }
   }
 
   renderBrewStep() {
     return <li>
-      Wait <strong>{this.state.grindBrewTime.time}s</strong> to brew.
     </li>;
   }
 
   renderStirStep() {
     if (this.state.clockwiseStirTimes > 0) {
       let instruction = ''
-      instruction += 'Stir ' + formatTimeEnglish(this.state.clockwiseStirTimes) + ' in one direction.';
       if (this.state.anticlockwiseStir) {
-        instruction += ' Repeat in the other direction.'
       }
       return <li>
         { instruction }
@@ -140,8 +123,6 @@ class Recipe extends React.Component {
   renderEndInvertStep() {
     if (this.state.inverted) {
       return <li>
-        Wet the filter paper, and put the cap on.
-        Place the mug upside-down on the aeropress and flip to be the normal orientation.
       </li>
     }
   }
